@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سپر | فایروال کوکی و شبکه</title>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- ===== هدر: رادار زنده ===== -->
+  <header class="hero">
+    <div class="hero-radar">
+      <svg viewBox="0 0 200 200" class="radar-svg" id="radarSvg">
+        <defs>
+          <radialGradient id="radarGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="#A855F7" stop-opacity="0.35"/>
+            <stop offset="100%" stop-color="#A855F7" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="95" fill="url(#radarGlow)"/>
+        <circle cx="100" cy="100" r="80" class="radar-ring ring-1"/>
+        <circle cx="100" cy="100" r="55" class="radar-ring ring-2"/>
+        <circle cx="100" cy="100" r="30" class="radar-ring ring-3"/>
+        <line x1="100" y1="5" x2="100" y2="195" class="radar-cross"/>
+        <line x1="5" y1="100" x2="195" y2="100" class="radar-cross"/>
+        <g id="radarSweepGroup" class="radar-sweep">
+          <path d="M100,100 L100,5 A95,95 0 0,1 167.2,32.8 Z" fill="url(#radarGlow)"/>
+        </g>
+        <circle cx="100" cy="100" r="5" class="radar-core"/>
+        <g id="radarBlips"></g>
+      </svg>
+    </div>
+    <div class="hero-text">
+      <p class="eyebrow">سپر فعال است</p>
+      <h1>محافظت زنده از کوکی و شبکه</h1>
+      <p class="hero-sub">هر درخواست، هر کوکی، زیر نظر است. نقاط قرمز روی رادار یعنی همین الان یک چیز مزاحم بلاک شد.</p>
+    </div>
+  </header>
+
+  <!-- ===== کارت‌های آمار ===== -->
+  <section class="stats-row" id="statsRow">
+    <div class="stat-card stat-block">
+      <span class="stat-label">بلاک‌شده</span>
+      <span class="stat-value" id="statBlocked">—</span>
+    </div>
+    <div class="stat-card stat-allow">
+      <span class="stat-label">اجازه داده‌شده</span>
+      <span class="stat-value" id="statAllowed">—</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">قوانین فعال</span>
+      <span class="stat-value" id="statRules">—</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-label">کل رویدادها</span>
+      <span class="stat-value" id="statTotal">—</span>
+    </div>
+  </section>
+
+  <main class="main-grid">
+
+    <!-- ===== ستون قوانین ===== -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>قوانین فایروال</h2>
+        <div class="tab-group" id="ruleTypeTabs">
+          <button class="tab active" data-type="">همه</button>
+          <button class="tab" data-type="network">شبکه</button>
+          <button class="tab" data-type="cookie">کوکی</button>
+        </div>
+      </div>
+
+      <form class="add-rule-form" id="addRuleForm">
+        <input type="text" id="rulePattern" placeholder="الگو، مثلا *.tracker.com*" required maxlength="200">
+        <select id="ruleType">
+          <option value="network">شبکه</option>
+          <option value="cookie">کوکی</option>
+        </select>
+        <select id="ruleAction">
+          <option value="block">بلاک</option>
+          <option value="allow">اجازه</option>
+        </select>
+        <input type="text" id="ruleNote" placeholder="یادداشت (اختیاری)" maxlength="200">
+        <button type="submit" class="btn-primary">افزودن قانون</button>
+      </form>
+
+      <div class="rules-list" id="rulesList">
+        <p class="empty-state">در حال بارگذاری قوانین…</p>
+      </div>
+    </section>
+
+    <!-- ===== ستون لاگ زنده ===== -->
+    <section class="panel">
+      <div class="panel-head">
+        <h2>رویدادهای زنده</h2>
+        <button class="btn-ghost" id="refreshLogsBtn">⟳ تازه‌سازی</button>
+      </div>
+      <div class="logs-list" id="logsList">
+        <p class="empty-state">هنوز رویدادی ثبت نشده.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== مودال اتصال (وارد کردن API Key) ===== -->
+  <div class="modal-overlay" id="authOverlay">
+    <div class="modal">
+      <p class="eyebrow">اتصال امن</p>
+      <h2>کلید API بک‌اند را وارد کنید</h2>
+      <p class="modal-desc">این کلید هنگام اولین اجرای سرور در ترمینال چاپ می‌شود و در فایل <code>backend/logs/.api_key</code> هم ذخیره شده. کلید فقط در مرورگر شما (localStorage) نگه داشته می‌شود و به جایی ارسال نمی‌شود.</p>
+      <input type="password" id="apiKeyInput" placeholder="کلید API را اینجا بچسبانید">
+      <button class="btn-primary" id="connectBtn">اتصال به سپر</button>
+      <p class="modal-error" id="authError"></p>
+    </div>
+  </div>
+
+</div>
+
+<script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<title>سپر</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+
+<div class="popup">
+
+  <header class="popup-head">
+    <div class="logo-dot"></div>
+    <h1>سپر</h1>
+    <span class="status-pill" id="statusPill">در حال بررسی…</span>
+  </header>
+
+  <div class="popup-stats">
+    <div class="mini-stat">
+      <span class="mini-label">بلاک‌شده امروز</span>
+      <span class="mini-value" id="blockedToday">—</span>
+    </div>
+    <div class="mini-stat">
+      <span class="mini-label">قوانین فعال</span>
+      <span class="mini-value" id="activeRules">—</span>
+    </div>
+  </div>
+
+  <div class="popup-section" id="connectedSection" style="display:none">
+    <button class="btn-block" id="openDashboardBtn">باز کردن داشبورد کامل</button>
+    <button class="btn-ghost-block" id="resyncBtn">همگام‌سازی قوانین</button>
+  </div>
+
+  <div class="popup-section" id="disconnectedSection">
+    <p class="hint-text">برای فعال‌سازی، سپر را به بک‌اند محلی متصل کنید.</p>
+    <input type="password" id="apiKeyInput" placeholder="کلید API را بچسبانید">
+    <button class="btn-block" id="connectBtn">اتصال</button>
+    <p class="error-text" id="errorText"></p>
+  </div>
+
+  <footer class="popup-footer">
+    سپر فقط با <code>127.0.0.1</code> صحبت می‌کند — هیچ داده‌ای خارج از دستگاه شما نمی‌رود.
+  </footer>
+
+</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

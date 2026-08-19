@@ -1,0 +1,54 @@
+{
+  "manifest_version": 3,
+  "name": "سپر — فایروال کوکی و شبکه",
+  "version": "1.0.0",
+  "description": "فایروال شخصی برای بلاک کردن کوکی‌های ردیاب و درخواست‌های شبکه‌ی مزاحم، بر اساس قوانینی که خودتان تعریف می‌کنید.",
+  "default_locale": "fa",
+
+  "permissions": [
+    "cookies",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "declarativeNetRequest",
+    "declarativeNetRequestFeedback"
+  ],
+
+  "host_permissions": [
+    "http://127.0.0.1:5000/*",
+    "<all_urls>"
+  ],
+
+  "background": {
+    "service_worker": "background/service_worker.js"
+  },
+
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "shepar_dynamic_rules",
+        "enabled": true,
+        "path": "rules/dynamic_rules.json"
+      }
+    ]
+  },
+
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}
